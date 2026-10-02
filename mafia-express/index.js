@@ -2,6 +2,9 @@ const app = require('express')();
 const http = require('http').createServer(app);
 const io  = require('socket.io')(http, { path: '/api', allowEIO3: true});
 const redis = require('redis');
+const { resolvePort } = require('./config');
+// resolve before connecting to redis so an invalid PORT fails fast at boot
+const port = resolvePort();
 const redisClient = redis.createClient({
     url: `redis://${process.env.REDIS_HOST || '127.0.0.1'}:6379`
 });
@@ -469,6 +472,6 @@ function updateGameStatus (player, socket) {
     saveGameStatusOnRedis()
 }
 
-http.listen(3000, function(){
-    console.log('listening on *:3000 2');
+http.listen(port, function(){
+    console.log('listening on *:' + port);
 });

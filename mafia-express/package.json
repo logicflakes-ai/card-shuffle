@@ -2,6 +2,9 @@
   "name": "socket-mafia",
   "version": "0.0.1",
   "description": "mafia socket.io app",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\""
+  },
   "dependencies": {
     "console-stamp": "^3.1.2",
     "express": "^5.2.1",
